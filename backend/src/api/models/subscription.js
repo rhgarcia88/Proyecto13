@@ -19,7 +19,7 @@ const subscriptionSchema = new mongoose.Schema(
     logoURL: { type: String, default: "https://example.com/default-logo.png" },
     reminderSettings: {
       isActive: { type: Boolean, default: true },
-      daysBefore: { type: Number, enum: [1, 2, 3, 5, 10, 15], default: 1 }, 
+      daysBefore: { type: Number, default: 1 }, 
     },
     paymentHistory: [
       {

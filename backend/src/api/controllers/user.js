@@ -2,6 +2,35 @@ const { generateSign } = require("../../config/jwt");
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
+
+const getCurrencies = async(req, res, next) => {
+
+  try {
+    const currencies = require('../../utils/currencies.json');
+    return res.status(200).json(currencies);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json("Error en la petición");
+  }
+}
+
+// Obtener los datos del usuario logueado
+const getUserProfile = async (req, res) => {
+  try {
+    // req.user contiene los datos del usuario autenticado desde el middleware `isAuth`
+    const user = await User.findById(req.user.id).select("-password"); // Excluye la contraseña
+
+    if (!user) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Error al obtener el perfil del usuario:", error.message);
+    res.status(500).json({ error: "Error al obtener el perfil del usuario" });
+  }
+};
+
 const register = async (req, res, next) =>{
   try{
       
@@ -41,9 +70,14 @@ const login = async (req, res, next) =>{
     if(user){
 
       if(bcrypt.compareSync(req.body.password,user.password)){
-        // Lo que pasa cuando te logueas con JWT
+        
           const token = generateSign(user._id);
-          return res.status(200).json({user,token});
+
+            // Convertir el documento a objeto plano
+        const userObject = user.toObject();
+        const { password, ...userWithoutPassword } = userObject;
+
+          return res.status(200).json({userWithoutPassword,token});
       }else{
         return res.status(400).json("Email or password are incorrect");
       }
@@ -57,7 +91,29 @@ const login = async (req, res, next) =>{
   return res.status(400).json(err);
   }
 }
+const setCurrency = async (req, res) => {
+  try {
+    const { currency } = req.body;
+    if (!currency) {
+      return res.status(400).json({ error: "Currency is required" });
+    }
 
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      { currency },
+      { new: true }
+    ).select("-password");
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    return res.status(200).json(updatedUser);
+  } catch (err) {
+    console.error("Error updating currency:", err);
+    return res.status(500).json({ error: "Error updating currency" });
+  }
+};
 const makePremium = async (req, res, next) => {
   try {
 
@@ -98,4 +154,7 @@ const makePremium = async (req, res, next) => {
 module.exports = {
   register,
   login,
+  getCurrencies,
+  getUserProfile,
+  setCurrency
 }
