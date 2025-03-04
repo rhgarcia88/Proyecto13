@@ -6,7 +6,7 @@ SmartySub es una aplicación diseñada para ayudar a los usuarios a gestionar su
 ## 🎯 Objetivo
 El propósito principal de SmartySub es brindar una herramienta intuitiva y accesible que permita a los usuarios:
 - Controlar sus suscripciones de manera centralizada.
-- Recibir alertas antes de que una suscripción se renueve automáticamente.
+- Recibir alertas por email antes de que una suscripción se renueve automáticamente.
 - Analizar los gastos en suscripciones y tomar decisiones informadas.
 - Identificar suscripciones innecesarias y optimizar su presupuesto.
 
@@ -34,6 +34,7 @@ Para probar la app, sirve con un simple registro
 - **Backend:** Node.js, Express, MongoDB
 - **Infraestructura:** Vercel
 - **Autenticación:** JWT
+- **Librerias Extra:** Nodemailer, Lucide, React Icons, Node-Cron
 
 ## 🚀 Roadmap del Proyecto
 📌 **Fase 1:** MVP con funcionalidades básicas de gestión de suscripciones.  
