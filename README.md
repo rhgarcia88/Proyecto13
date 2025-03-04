@@ -1,4 +1,4 @@
-# 📌 SmartySub [smar](https://smartysub.vercel.app/)
+# 📌 SmartySub [Link](https://smartysub.vercel.app/)
 
 ## 📝 Descripción
 SmartySub es una aplicación diseñada para ayudar a los usuarios a gestionar sus suscripciones de manera eficiente. Con el aumento de los servicios por suscripción, es común perder el control de los pagos recurrentes, lo que lleva a gastos innecesarios. SmartySub proporciona una solución simple y organizada para visualizar, administrar y optimizar los gastos en suscripciones.
