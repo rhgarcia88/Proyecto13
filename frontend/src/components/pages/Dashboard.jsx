@@ -28,6 +28,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { toast } from "@/components/ui/use-toast";
+import { getBaseUrl } from '../../utils';
 
 const Dashboard = () => {
   const [data, setData] = useState(null);
@@ -71,7 +72,8 @@ const Dashboard = () => {
 
     async function fetchData() {
       try {
-        const response = await fetch("http://localhost:3000/api/v1/subscriptions/stats", {
+        const baseUrl = getBaseUrl();
+        const response = await fetch(`${baseUrl}/api/v1/subscriptions/stats`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -93,7 +95,8 @@ const Dashboard = () => {
   useEffect(() => {
     async function fetchSubscriptions() {
       try {
-        const response = await fetch("http://localhost:3000/api/v1/subscriptions/", {
+        const baseUrl = getBaseUrl();
+        const response = await fetch(`${baseUrl}/api/v1/subscriptions/`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -152,7 +155,8 @@ const Dashboard = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/api/v1/subscriptions", {
+      const baseUrl = getBaseUrl();
+      const response = await fetch(`${baseUrl}/api/v1/subscriptions`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

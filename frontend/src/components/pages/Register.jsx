@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Lock, User, Mail } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/use-toast";
+import { getBaseUrl } from '../../utils';
+
 
 const Register = () => {
   const navigate = useNavigate();
@@ -35,7 +37,8 @@ const Register = () => {
 
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3000/api/v1/users/register", {
+      const baseUrl = getBaseUrl();
+      const response = await fetch(`${baseUrl}/api/v1/users/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

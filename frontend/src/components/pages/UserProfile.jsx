@@ -11,6 +11,7 @@ import {
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import Header from "../ui/header";
 import { useNavigate } from "react-router-dom";
+import { getBaseUrl } from '../../utils';
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
@@ -22,7 +23,8 @@ const UserProfile = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const userResponse = await fetch("http://localhost:3000/api/v1/users/", {
+        const baseUrl = getBaseUrl();
+        const userResponse = await fetch(`${baseUrl}/api/v1/users/`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -30,7 +32,7 @@ const UserProfile = () => {
         const userData = await userResponse.json();
         setUser(userData);
 
-        const currenciesResponse = await fetch("http://localhost:3000/api/v1/users/currencies", {
+        const currenciesResponse = await fetch(`${baseUrl}/api/v1/users/currencies`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -47,7 +49,8 @@ const UserProfile = () => {
     // Función para actualizar la moneda del usuario
     const handleCurrencyChange = async (currencyCode) => {
       try {
-        const response = await fetch("http://localhost:3000/api/v1/users/setCurrency", {
+        const baseUrl = getBaseUrl();
+        const response = await fetch(`${baseUrl}/api/v1/users/setCurrency`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

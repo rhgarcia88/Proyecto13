@@ -9,6 +9,7 @@ import { CalendarIcon, CreditCardIcon, TagIcon, ClockIcon, FileText, ChevronLeft
 import Header from "../ui/header";
 import { Slider } from "@/components/ui/slider";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { getBaseUrl } from '../../utils';
 
 const SubscriptionDetail = () => {
   const { id } = useParams();
@@ -33,7 +34,8 @@ const SubscriptionDetail = () => {
   useEffect(() => {
     async function fetchSubscription() {
       try {
-        const response = await fetch(`http://localhost:3000/api/v1/subscriptions/${id}`, {
+        const baseUrl = getBaseUrl();
+        const response = await fetch(`${baseUrl}/api/v1/subscriptions/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -63,7 +65,8 @@ const SubscriptionDetail = () => {
   const handleToggleReminder = async () => {
     setUpdatingReminder(true);
     try {
-      const response = await fetch(`http://localhost:3000/api/v1/subscriptions/${id}/reminders`, {
+      const baseUrl = getBaseUrl();
+      const response = await fetch(`${baseUrl}/api/v1/subscriptions/${id}/reminders`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -105,7 +108,8 @@ const SubscriptionDetail = () => {
     
     setUpdatingReminder(true);
     try {
-      const response = await fetch(`http://localhost:3000/api/v1/subscriptions/${id}/reminders`, {
+      const baseUrl = getBaseUrl();
+      const response = await fetch(`${baseUrl}/api/v1/subscriptions/${id}/reminders`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -140,7 +144,8 @@ const SubscriptionDetail = () => {
 
   const handleDeleteSubscription = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/v1/subscriptions/${id}`, {
+      const baseUrl = getBaseUrl();
+      const response = await fetch(`${baseUrl}/api/v1/subscriptions/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

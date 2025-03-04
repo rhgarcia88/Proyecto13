@@ -3,7 +3,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Lock, User } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { useToast } from "@/components/ui/use-toast"; // Asegúrate de la ruta correcta
+import { useToast } from "@/components/ui/use-toast"; 
+import { getBaseUrl } from '../../utils';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +16,8 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/api/v1/users/login", {
+      const baseUrl = getBaseUrl();
+      const response = await fetch(`${baseUrl}/api/v1/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

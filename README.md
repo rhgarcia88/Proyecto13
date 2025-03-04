@@ -23,7 +23,7 @@ SmartySub está diseñado para:
 ✅ Opciones de personalización para cada suscripción.  
 ✅ Plan gratuito y opciones premium con beneficios adicionales.  
 
-Para probar el premium agrego un usario con el premium activado:
+Para probar el premium agrego un usuario con el premium activado:
     🫂  premium@premium.com
     ✳️     premium
 
