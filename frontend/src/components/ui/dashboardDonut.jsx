@@ -33,7 +33,7 @@ export function DashboardDonut({ categories = {} }) {
     <Card className="flex flex-col">
       
       <CardContent className="flex-1 pb-0">
-        {/* Se pasa un objeto config válido a ChartContainer para Shadcn UI */}
+        {/* Se pasa un objeto config válido a ChartContainer para shadcn */}
         <ChartContainer config={{ styles: {} }} className="mx-auto aspect-square max-h-[250px]">
         <PieChart width={200} height={200}>
       <Pie

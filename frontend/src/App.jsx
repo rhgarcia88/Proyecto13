@@ -102,7 +102,7 @@ function App() {
                     With SmartySub, you can keep track of every subscription, receive renewal reminders, and manage your monthly expenses, all in one simple dashboard.
                   </p>
                   <div className="flex items-baseline gap-5">
-                    <a href="#lego">
+                    <a href="/login">
                       <motion.button
                         className="mt-6 px-6 py-3 bg-primary text-secondary font-medium rounded-md hover:bg-red-800 transition duration-300 ease-in-out"
                         whileHover={{ scale: 1.05 }}
