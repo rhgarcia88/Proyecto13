@@ -5,31 +5,30 @@ import { ChartContainer } from "@/components/ui/chart";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
-export function DashboardDonut({ categories }) {
-  // Transformamos el objeto "categories" en un array para el gráfico
+export function DashboardDonut({ categories = {} }) {
+    
   const chartData = React.useMemo(() => {
-    return Object.entries(categories).map(([category, count], index) => ({
+    return Object.entries(categories ?? {}).map(([category, count], index) => ({
       name: category,
       value: count,
       fill: COLORS[index % COLORS.length],
     }));
   }, [categories]);
-
-  // Calculamos el total de suscripciones
+  
   const totalCount = React.useMemo(() => {
-    return Object.values(categories).reduce((total, num) => total + num, 0);
+    return Object.values(categories ?? {}).reduce((total, num) => total + num, 0);
   }, [categories]);
-
+  
   const data = Object.entries(categories || {}).map(([name, count]) => ({
     name,
     value: Number(count),
   }));
+  
 
-  // Si no hay datos, se muestra un fallback
-  if (data.length === 0) {
+  if (!data.length) {
     return <div className="text-center text-sm text-gray-400">No data available</div>;
   }
-
+  
   return (
     <Card className="flex flex-col">
       

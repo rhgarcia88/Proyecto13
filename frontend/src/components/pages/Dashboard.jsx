@@ -379,12 +379,12 @@ const Dashboard = () => {
             <CardContent>
               <DashboardDonut categories={data.categories} />
               <Card className="p-4 mt-2">
-              {Object.entries(data.categories || {}).map(([category, count]) => (
-              <p key={category} className="text-lg">
-                {category}: {count}
-              </p>
-            ))}
-              </Card>
+  {Object.entries(data?.categories ?? {}).map(([category, count]) => (
+    <p key={category} className="text-lg">
+      {category}: {count}
+    </p>
+  ))}
+</Card>
             </CardContent>
           </Card>
 
