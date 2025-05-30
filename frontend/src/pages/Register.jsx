@@ -3,12 +3,12 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Lock, User, Mail } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "@/components/ui/use-toast";
-import { getBaseUrl } from '../../utils';
-
+import { useToast } from "@/components/ui/use-toast";
+import { getBaseUrl } from "../lib/utils";
 
 const Register = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     userName: "",
     email: "",
@@ -29,7 +29,7 @@ const Register = () => {
     if (formData.password !== formData.confirmPassword) {
       toast({
         title: "Error",
-        description: "Passwords do not match.",
+        description: "Las contraseñas no coinciden.",
         variant: "destructive",
       });
       return;
@@ -40,30 +40,50 @@ const Register = () => {
       const baseUrl = getBaseUrl();
       const response = await fetch(`${baseUrl}/api/v1/users/register`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           userName: formData.userName,
           email: formData.email,
           password: formData.password,
         }),
       });
+
+      const data = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Registration failed");
+        // Mapea el código de error del backend a un mensaje claro
+        let message = data.error?.message || "Ups, algo salió mal. Inténtalo de nuevo.";
+        switch (data.error?.code) {
+          case "USER_ALREADY_EXISTS":
+            message = "Ya existe un usuario con ese email o nombre de usuario.";
+            break;
+          case "REGISTER_FAILED":
+            message = "No hemos podido crear tu cuenta. Vuelve a intentarlo más tarde.";
+            break;
+            
+          default:
+            break;
+        }
+        toast({
+          title: "Error al registrarte",
+          description: message,
+          variant: "destructive",
+        });
+        return;
       }
+
+      // Éxito
       toast({
-        title: "Success",
-        description: "Registration successful! Please log in.",
+        title: "¡Cuenta creada!",
+        description: "Registro exitoso. Ahora puedes iniciar sesión.",
         variant: "success",
       });
       navigate("/login");
-    } catch (error) {
-      console.error("Registration error:", error);
+    } catch (err) {
+      console.error("Registration error:", err);
       toast({
-        title: "Error",
-        description: error.message,
+        title: "Error de red",
+        description: "No podemos conectar con el servidor. Revisa tu conexión.",
         variant: "destructive",
       });
     } finally {
@@ -82,18 +102,16 @@ const Register = () => {
       <Link to="/" className="absolute z-10 top-2 w-64 cursor-pointer">
         <img src="/longLogo.png" alt="Logo SmartySub" />
       </Link>
-      {/* Background video */}
       <video
         className="absolute inset-0 object-cover w-full h-full -z-1"
         src="/vid/register.mp4"
         autoPlay
         loop
         muted
-      ></video>
+      />
 
-      {/* Form container */}
       <div className="w-full max-w-md p-8 space-y-6 bg-white/90 rounded-md shadow-lg z-10">
-        <h2 className="text-2xl font-bold text-center">Create Your Account</h2>
+        <h2 className="text-2xl font-bold text-center">Crear cuenta</h2>
         <form onSubmit={handleRegister} className="space-y-4">
           <div className="relative">
             <Input
@@ -144,14 +162,14 @@ const Register = () => {
             <Lock className="absolute left-3 top-2.5 text-gray-500" />
           </div>
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Registering..." : "Register"}
+            {loading ? "Registrando..." : "Registrar"}
           </Button>
         </form>
 
         <p className="text-sm text-center text-gray-500">
-          Already have an account?{" "}
+          ¿Ya tienes cuenta?{" "}
           <Link to="/login" className="text-primary">
-            Login
+            Inicia sesión
           </Link>
         </p>
       </div>

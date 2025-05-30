@@ -1,10 +1,10 @@
 // App.jsx (versión Landing integrada)
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Login from "./components/pages/Login";
-import Register from "./components/pages/Register";
-import UserProfile from "./components/pages/UserProfile";
-import Dashboard from "./components/pages/Dashboard";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import UserProfile from "./pages/UserProfile";
+import Dashboard from "./pages/Dashboard";
 import { Toaster } from "@/components/ui/toaster";
 import { HiOutlineDeviceMobile, HiOutlineClock, HiOutlineChartSquareBar } from "react-icons/hi";
 import { FaCheck } from "react-icons/fa";
@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
 import Header from "./components/ui/header";
-import SubscriptionDetail from "./components/pages/Subscription";
+import SubscriptionDetail from "./pages/Subscription";
 
 function App() {
   // Variants para animaciones con Framer Motion

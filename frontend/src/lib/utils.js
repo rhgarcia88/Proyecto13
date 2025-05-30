@@ -5,7 +5,8 @@ export function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
-export const getBaseURL = () => {
-    return "http://localhost:3000/";
-    //return "https://smartysubbackend.vercel.app/";
-};
+export const getBaseUrl = () => {
+  //return "http://localhost:3000";
+  return "https://proyecto13backend.vercel.app";
+   
+  }

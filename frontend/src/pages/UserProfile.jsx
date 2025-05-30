@@ -9,9 +9,9 @@ import {
   SelectItem 
 } from "@/components/ui/select";
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
-import Header from "../ui/header";
+import Header from "../components/ui/header";
 import { useNavigate } from "react-router-dom";
-import { getBaseUrl } from '../../utils';
+import { getBaseUrl } from '../lib/utils';
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);

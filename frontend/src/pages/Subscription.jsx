@@ -6,10 +6,10 @@ import { Switch } from "@/components/ui/switch";
 import { toast } from "@/components/ui/use-toast";
 import Skeleton from "@/components/ui/skeleton";
 import { CalendarIcon, CreditCardIcon, TagIcon, ClockIcon, FileText, ChevronLeftIcon, BellIcon, TrashIcon } from "lucide-react";
-import Header from "../ui/header";
+import Header from "../components/ui/header";
 import { Slider } from "@/components/ui/slider";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { getBaseUrl } from '../../utils';
+import { getBaseUrl } from '../lib/utils';
 
 const SubscriptionDetail = () => {
   const { id } = useParams();
